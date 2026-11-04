@@ -6,6 +6,7 @@ import { catalog, formatEuro } from "./inventory.js";
 
 const PORT = Number(process.env.PORT) || 3000;
 const VERSION = process.env.APP_VERSION || "dev";
+const STARTED_AT = new Date().toISOString();
 
 function sendJson(res, status, body) {
   res.writeHead(status, { "content-type": "application/json; charset=utf-8" });
@@ -34,7 +35,9 @@ function renderPage() {
 
 export const server = createServer((req, res) => {
   const url = new URL(req.url, "http://localhost");
-  if (url.pathname === "/health") return sendJson(res, 200, { status: "ok", version: VERSION });
+  if (url.pathname === "/health") {
+    return sendJson(res, 200, { status: "ok", version: VERSION, startedAt: STARTED_AT });
+  }
   if (url.pathname === "/api/parts") return sendJson(res, 200, catalog);
   if (url.pathname === "/") {
     res.writeHead(200, { "content-type": "text/html; charset=utf-8" });

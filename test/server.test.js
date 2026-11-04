@@ -14,7 +14,10 @@ after(() => server.close());
 test("GET /health meldet ok", async () => {
   const res = await fetch(`${base}/health`);
   assert.equal(res.status, 200);
-  assert.equal((await res.json()).status, "ok");
+  const health = await res.json();
+  assert.equal(health.status, "ok");
+  assert.equal(typeof health.version, "string");
+  assert.match(health.startedAt, /^\d{4}-\d{2}-\d{2}T.*Z$/);
 });
 
 test("GET /api/parts liefert den Katalog", async () => {
