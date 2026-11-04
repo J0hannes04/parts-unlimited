@@ -4,6 +4,7 @@ import { findPart, isInStock, orderTotal, formatEuro } from "../src/inventory.js
 
 test("findet ein Teil anhand der Artikelnummer", () => {
   assert.equal(findPart("PU-2001").name, "Ölfilter");
+  assert.equal(findPart("PU-5001").name, "Batterie 12V");
   assert.equal(findPart("GIBT-ES-NICHT"), undefined);
 });
 
