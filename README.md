@@ -26,3 +26,9 @@ src/inventory.js   Katalog, Lagerprüfung, Preisberechnung
 src/server.js      Webserver
 test/              Tests mit dem eingebauten Test-Runner von Node
 ```
+## Definition of Done (DoD)
+Ein Issue gilt erst dann als vollständig abgeschlossen, wenn:
+- [x] Der Code geschrieben ist und lokal funktioniert.
+- [x] Passende Tests geschrieben wurden und alle Tests grün sind (`npm test`).
+- [x] Ein Pull Request erstellt und das Issue in der Beschreibung verknüpft wurde (z. B. mit `Closes #1`).
+- [x] Der Pull Request reviewt und in den `main`-Branch gemergt wurde.
