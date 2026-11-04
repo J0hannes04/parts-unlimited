@@ -22,6 +22,12 @@ test("GET /api/parts liefert den Katalog", async () => {
   assert.ok(parts.length >= 5);
 });
 
+test("Startseite kennzeichnet ausverkaufte Teile deutlich", async () => {
+  const html = await (await fetch(`${base}/`)).text();
+  assert.match(html, /class="out-of-stock"/);
+  assert.match(html, /class="stock-status" role="status">AUSVERKAUFT<\/strong>/);
+});
+
 test("unbekannte Pfade liefern 404", async () => {
   const res = await fetch(`${base}/gibts-nicht`);
   assert.equal(res.status, 404);

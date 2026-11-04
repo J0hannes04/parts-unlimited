@@ -16,13 +16,17 @@ function renderPage() {
   const rows = catalog
     .map(
       (p) =>
-        `<tr><td>${p.sku}</td><td>${p.name}</td><td>${formatEuro(p.priceCents)}</td><td>${
-          p.stock > 0 ? p.stock : "ausverkauft"
+        `<tr${p.stock === 0 ? ' class="out-of-stock"' : ""}><td>${p.sku}</td><td>${p.name}</td><td>${formatEuro(
+          p.priceCents,
+        )}</td><td>${
+          p.stock > 0
+            ? `${p.stock} Stück`
+            : '<strong class="stock-status" role="status">AUSVERKAUFT</strong>'
         }</td></tr>`,
     )
     .join("");
   return `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Parts Unlimited</title>
-<style>body{font-family:Arial,sans-serif;margin:2rem;color:#333}table{border-collapse:collapse}td,th{padding:.4rem .8rem;border-bottom:1px solid #ddd;text-align:left}</style>
+<style>body{font-family:Arial,sans-serif;margin:2rem;color:#333}table{border-collapse:collapse}td,th{padding:.4rem .8rem;border-bottom:1px solid #ddd;text-align:left}.out-of-stock{background:#fff1f1}.stock-status{color:#b00020;letter-spacing:.04em}</style>
 </head><body><h1>Parts Unlimited – Teilekatalog</h1>
 <table><thead><tr><th>Artikel</th><th>Bezeichnung</th><th>Preis</th><th>Lager</th></tr></thead><tbody>${rows}</tbody></table>
 <p><small>Version ${VERSION}</small></p></body></html>`;
